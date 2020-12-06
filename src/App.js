@@ -5,41 +5,7 @@ import UserAdd from './components/userAdd/UserAdd'
 
 class App extends Component {
   state = {
-    data: [
-      {
-        name: 'tret',
-        lastName: 'tret',
-        patronymic: 'tert',
-        email: 'president@mail.ru',
-        password: 'president',
-        phone: '88005553535',
-        status: 'admin',
-        creationDate: 'gfd',
-        lastChange: 'gdf'
-      },
-      {
-        name: 'tert',
-        lastName: 'trete',
-        patronymic: 'tret',
-        email: 'president@mail.ru',
-        password: 'president',
-        phone: '88005553535',
-        status: 'client',
-        creationDate: 'tert',
-        lastChange: 'tret'
-      },
-      {
-        name: 'gdf',
-        lastName: 'gdfg',
-        patronymic: 'dfgdf',
-        email: 'nett@mail.ru',
-        password: 'president',
-        phone: '94735',
-        status: 'partner',
-        creationDate: 'gdf',
-        lastChange: 'gdf'
-      }
-    ],
+    data: [ ],
     sort: 'asc',
     sortItem: '',
     seachValue: '',
@@ -49,6 +15,18 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const data = JSON.parse(localStorage.getItem('data'))
+    const arr = []
+    Object.entries(data).forEach(([key, value]) => (arr.push({ key: value })));
+
+    console.log(typeof arr)
+  
+
+      this.setState({
+        data: arr
+      })
+    
+    console.log(this.state)
     this.handleSort('status')
   }
 
@@ -102,6 +80,7 @@ class App extends Component {
       data,
       showModal: false
     })
+    this.setLocalStorageData()
   }
 
   handleSelect = (el, index) => {
@@ -119,6 +98,7 @@ class App extends Component {
       data: arrayCopy
     })
     this.handleClose()
+    this.setLocalStorageData()
   }
 
   handleChange = (data) => {
@@ -129,6 +109,7 @@ class App extends Component {
       data: arrayCopy
     })
     this.handleClose()
+    this.setLocalStorageData()
   }
 
   handleClose = () => {
@@ -145,6 +126,10 @@ class App extends Component {
     const m = date.getMonth() + 1
     const y = date.getFullYear()
     return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d)
+  }
+
+  setLocalStorageData = () => {
+    localStorage.setItem('data', JSON.stringify([...this.state.data]))
   }
 
   render() {

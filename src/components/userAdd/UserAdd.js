@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './UserAdd.css'
+import { isValid, lastValue } from './../validation/validation'
 
 class UserAdd extends Component {
 
@@ -24,8 +25,14 @@ class UserAdd extends Component {
         arrayCopy['creationDate'] = this.state.data.creationDate
         this.setState({ data: arrayCopy })
 
-        let toggle = Object.values(arrayCopy).every(k => k !== '' || k === null)
-        if (toggle) this.setState({ disabled: false })
+        let toggle = Object.entries(arrayCopy).every(([key, value]) => { return isValid(key, value) })
+        toggle ? this.setState({ disabled: false }) : this.setState({ disabled: true })
+
+        // if(lastValue){
+        //     document.querySelector(`[data-tag="${lastValue}"]`).style.border = '2px solid red'
+        // } else {
+        //     document.querySelector(`[data-tag="${lastValue}"]`).style.border = ''
+        // }
     }
 
     clearState = () => {
@@ -42,7 +49,6 @@ class UserAdd extends Component {
                 creationDate: '',
             }
         })
-        
     }
 
     componentDidMount() {
@@ -60,20 +66,14 @@ class UserAdd extends Component {
                     creationDate: el.creationDate
                 }
             })
-        } 
+        }
     }
 
     render() {
+       
         return (
             <div className='wrapper'>
                 <div className='UserAdd'>
-                    <div>
-                        <div className='name'>
-                            patronymic
-                        </div>
-
-                        <input type='text' data-tag='patronymic' value={this.state.data.patronymic} onChange={event => this.handleChange(event.target.getAttribute('data-tag'), event.target.value)} />
-                    </div>
                     <div>
                         <div className='name'>
                             firstName
@@ -85,6 +85,13 @@ class UserAdd extends Component {
                             lastName
                         </div>
                         <input type='text' value={this.state.data.lastName} data-tag='lastName' onChange={event => this.handleChange(event.target.getAttribute('data-tag'), event.target.value)} />
+                    </div>
+                    <div>
+                        <div className='name'>
+                            patronymic
+                        </div>
+
+                        <input type='text' data-tag='patronymic' value={this.state.data.patronymic} onChange={event => this.handleChange(event.target.getAttribute('data-tag'), event.target.value)} />
                     </div>
                     <div>
                         <div className='name'>
@@ -149,7 +156,7 @@ class UserAdd extends Component {
                                     Добавить в таблицу
                                 </button>
                         }
-                        
+
                     </div>
                 </div>
             </div>

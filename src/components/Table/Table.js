@@ -11,8 +11,6 @@ const Table = props => {
         }
     }
 
- 
-
     return (
         <div style={{ overflowX: 'auto', width: "100%" }}>
             <table className='table' >
@@ -28,7 +26,7 @@ const Table = props => {
                     </tr>
                 </thead>
                 <tbody>
-                    {
+                    {   
                         props.data.map((el, index) => {
                             const id = Math.random()
                             return (
