@@ -124,7 +124,7 @@ class UserAdd extends Component {
                         <div className='name'>
                             status
                         </div>
-                        <select data-tag='status' onChange={event => this.handleChange(event.target.getAttribute('data-tag'), event.target.value)}>
+                        <select data-tag='status' value={this.state.data.status} onChange={event => this.handleChange(event.target.getAttribute('data-tag'), event.target.value)}>
                             <option value='null' hidden=''>Выберите статус</option>
                             <option value="client">client</option>
                             <option value="partner">partner</option>
