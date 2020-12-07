@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './UserAdd.css'
-import { isValid, lastValue } from './../validation/validation'
+import { isValid } from './../validation/validation'
 
 class UserAdd extends Component {
 
@@ -20,7 +20,7 @@ class UserAdd extends Component {
 
     handleChange = (target, value) => {
         let arrayCopy = { ...this.state.data }
-
+        console.log(this.state.data)
         arrayCopy[target] = value
         arrayCopy['creationDate'] = this.state.data.creationDate
         this.setState({ data: arrayCopy })
@@ -70,7 +70,7 @@ class UserAdd extends Component {
     }
 
     render() {
-       
+
         return (
             <div className='wrapper'>
                 <div className='UserAdd'>
@@ -117,7 +117,13 @@ class UserAdd extends Component {
                         <div className='name'>
                             status
                         </div>
-                        <input data-tag='status' type='text' value={this.state.data.status} onChange={event => this.handleChange(event.target.getAttribute('data-tag'), event.target.value)} />
+                        <select data-tag='status' onChange={event => this.handleChange(event.target.getAttribute('data-tag'), event.target.value)}>
+                            <option value='null' hidden=''>Выберите статус</option>
+                            <option value="client">client</option>
+                            <option value="partner">partner</option>
+                            <option value="admin">admin</option>
+                        </select>
+                        {/* <input data-tag='status' type='text' value={this.state.data.status} onChange={event => this.handleChange(event.target.getAttribute('data-tag'), event.target.value)} /> */}
                     </div>
 
                     <div style={{ paddingTop: '20px' }}>

@@ -17,21 +17,21 @@ const Table = props => {
                 <thead>
                     <tr style={{ userSelect: "none" }}>
                         <th>fullName</th>
-                        <th >email</th>
-                        <th >password</th>
-                        <th >phone</th>
+                        <th>email</th>
+                        <th>password</th>
+                        <th>phone</th>
                         <th onClick={() => props.sorted('status')}>status {props.sortItem === 'status' ? arrSort(props.sortVal) : null}</th>
                         <th>creationDate</th>
-                        <th >lastChange</th>
+                        <th>lastChange</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {   
+                    {
                         props.data.map((el, index) => {
                             const id = Math.random()
                             return (
                                 <tr key={id} onClick={() => props.handleSelect(el, index)}>
-                                    <td>{el.name} {el.lastName} {el.patronymic}</td>
+                                    <td>{el.lastName} {el.name} {el.patronymic}</td>
                                     <td>{el.email}</td>
                                     <td>{el.password}</td>
                                     <td>{el.phone}</td>

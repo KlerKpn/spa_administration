@@ -5,7 +5,19 @@ import UserAdd from './components/userAdd/UserAdd'
 
 class App extends Component {
   state = {
-    data: [ ],
+    data: [{
+      
+        name: 'Андрей',
+        lastName: 'Чавычалов',
+        patronymic: 'Александрович',
+        email: 'andrey.invorkel@mail.ru',
+        password: '123456',
+        phone: '3232323223',
+        status: 'client',
+        creationDate: '2020-12-06',
+        lastChange: '2020-12-07'
+    
+    }],
     sort: 'asc',
     sortItem: '',
     seachValue: '',
@@ -14,19 +26,15 @@ class App extends Component {
     fixUser: null
   }
 
-  componentDidMount() {
-    const data = JSON.parse(localStorage.getItem('data'))
-    const arr = []
-    Object.entries(data).forEach(([key, value]) => (arr.push({ key: value })));
+  async componentDidMount() {
+    const data = await JSON.parse(localStorage.getItem('data'))
 
-    console.log(typeof arr)
-  
-
+    if(data){
       this.setState({
-        data: arr
+        data: data
       })
-    
-    console.log(this.state)
+    }
+
     this.handleSort('status')
   }
 
@@ -71,12 +79,12 @@ class App extends Component {
     })
   }
 
-  modalHandler = newUser => {
+  modalHandler = async newUser => {
     newUser['creationDate'] = this.getDate()
     newUser['lastChange'] = this.getDate()
     let data = [...this.state.data]
     data.unshift(newUser)
-    this.setState({
+    await this.setState({
       data,
       showModal: false
     })
@@ -91,21 +99,21 @@ class App extends Component {
     })
   }
 
-  handleDelete = () => {
+  handleDelete = async () => {
     let arrayCopy = [...this.state.data]
     arrayCopy.splice(this.state.fixUserIndex, 1)
-    this.setState({
+    await this.setState({
       data: arrayCopy
     })
     this.handleClose()
     this.setLocalStorageData()
   }
 
-  handleChange = (data) => {
+  handleChange = async (data) => {
     let arrayCopy = [...this.state.data]
     data['lastChange'] = this.getDate()
     arrayCopy[this.state.fixUserIndex] = data
-    this.setState({
+    await this.setState({
       data: arrayCopy
     })
     this.handleClose()
@@ -129,7 +137,8 @@ class App extends Component {
   }
 
   setLocalStorageData = () => {
-    localStorage.setItem('data', JSON.stringify([...this.state.data]))
+    const data = [...this.state.data]
+    localStorage.setItem('data', JSON.stringify(data))
   }
 
   render() {

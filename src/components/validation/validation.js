@@ -4,7 +4,6 @@ export let lastValue = ''
 
 export function isValid(key, value) {
     lastValue = key || ''
-    console.log(lastValue)
     switch (key) {
         case 'name':
             return value.length > 1 && _.capitalized(value)
@@ -19,7 +18,7 @@ export function isValid(key, value) {
         case 'phone':
             return _.number(Number.parseInt(value)) && value.length > 9 && value.length < 12
         case 'status':
-            return value !== ''
+            return value !== '' && value !== 'null'
         default:
             return true
     }
