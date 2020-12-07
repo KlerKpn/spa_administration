@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './UserAdd.css'
-import { isValid } from './../validation/validation'
+import { isValid, lastValue } from './../validation/validation'
 
 class UserAdd extends Component {
 
@@ -28,11 +28,18 @@ class UserAdd extends Component {
         let toggle = Object.entries(arrayCopy).every(([key, value]) => { return isValid(key, value) })
         toggle ? this.setState({ disabled: false }) : this.setState({ disabled: true })
 
-        // if(lastValue){
-        //     document.querySelector(`[data-tag="${lastValue}"]`).style.border = '2px solid red'
-        // } else {
-        //     document.querySelector(`[data-tag="${lastValue}"]`).style.border = ''
-        // }
+        if (lastValue) {
+            document.querySelector(`[data-tag="name"]`).style.border = ''
+            document.querySelector(`[data-tag="lastName"]`).style.border = ''
+            document.querySelector(`[data-tag="patronymic"]`).style.border = ''
+            document.querySelector(`[data-tag="email"]`).style.border = ''
+            document.querySelector(`[data-tag="password"]`).style.border = ''
+            document.querySelector(`[data-tag="phone"]`).style.border = ''
+            document.querySelector(`[data-tag="status"]`).style.border = '  '
+            if(lastValue !== 'creationDate'){
+                document.querySelector(`[data-tag="${lastValue}"]`).style.border = '2px solid red'
+            }
+        } 
     }
 
     clearState = () => {
@@ -123,7 +130,6 @@ class UserAdd extends Component {
                             <option value="partner">partner</option>
                             <option value="admin">admin</option>
                         </select>
-                        {/* <input data-tag='status' type='text' value={this.state.data.status} onChange={event => this.handleChange(event.target.getAttribute('data-tag'), event.target.value)} /> */}
                     </div>
 
                     <div style={{ paddingTop: '20px' }}>
