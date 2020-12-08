@@ -36,10 +36,10 @@ class UserAdd extends Component {
             document.querySelector(`[data-tag="password"]`).style.border = ''
             document.querySelector(`[data-tag="phone"]`).style.border = ''
             document.querySelector(`[data-tag="status"]`).style.border = '  '
-            if(lastValue !== 'creationDate'){
+            if (lastValue !== 'creationDate') {
                 document.querySelector(`[data-tag="${lastValue}"]`).style.border = '2px solid red'
             }
-        } 
+        }
     }
 
     clearState = () => {
@@ -132,9 +132,8 @@ class UserAdd extends Component {
                         </select>
                     </div>
 
-                    <div style={{ paddingTop: '20px' }}>
+                    <div className='group-btn'>
                         <button
-                            style={{ marginRight: '5px' }}
                             className='btn btn-dark'
                             onClick={() => { this.props.close(); this.clearState() }}
                         >
@@ -143,10 +142,9 @@ class UserAdd extends Component {
 
                         {
                             this.props.user
-                                ?
-                                <>
+
+                                ? <>
                                     <button
-                                        style={{ marginRight: '5px' }}
                                         className='btn btn-danger'
                                         onClick={() => { this.props.delete(); this.clearState() }}
                                     >

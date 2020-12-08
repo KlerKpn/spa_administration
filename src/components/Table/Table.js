@@ -13,14 +13,19 @@ const Table = props => {
 
     return (
         <div style={{ overflowX: 'auto', width: "100%" }}>
-            <table className='table' >
+            <table className='table table-striped table-dark' >
                 <thead>
-                    <tr style={{ userSelect: "none" }}>
+                    <tr>
                         <th>fullName</th>
                         <th>email</th>
                         <th>password</th>
                         <th>phone</th>
-                        <th onClick={() => props.sorted('status')}>status {props.sortItem === 'status' ? arrSort(props.sortVal) : null}</th>
+                        <th
+                            onClick={() => props.sorted('status')}
+                            style={{whiteSpace: 'nowrap'}}
+                        >
+                            status {props.sortItem === 'status' ? arrSort(props.sortVal) : null}
+                        </th>
                         <th>creationDate</th>
                         <th>lastChange</th>
                     </tr>

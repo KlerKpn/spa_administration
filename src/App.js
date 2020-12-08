@@ -5,8 +5,8 @@ import UserAdd from './components/userAdd/UserAdd'
 
 class App extends Component {
   state = {
-    data: [{
-      
+    data: [
+      {
         name: 'Андрей',
         lastName: 'Чавычалов',
         patronymic: 'Александрович',
@@ -16,8 +16,8 @@ class App extends Component {
         status: 'client',
         creationDate: '2020-12-06',
         lastChange: '2020-12-07'
-    
-    }],
+      }
+    ],
     sort: 'asc',
     sortItem: '',
     seachValue: '',
@@ -29,7 +29,7 @@ class App extends Component {
   async componentDidMount() {
     const data = await JSON.parse(localStorage.getItem('data'))
 
-    if(data){
+    if (data) {
       this.setState({
         data: data
       })
@@ -143,8 +143,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-
+      <div className='container'>
         {
           this.state.showModal
             ? <UserAdd
