@@ -29,11 +29,7 @@ class App extends Component {
   async componentDidMount() {
     const data = await JSON.parse(localStorage.getItem('data'))
 
-    if (data) {
-      this.setState({
-        data: data
-      })
-    }
+    if (data) this.setState({ data: data })
 
     this.handleSort('status')
   }
@@ -157,7 +153,7 @@ class App extends Component {
         }
 
         <Search search={this.handleSearch} />
-        <button onClick={() => this.setState({ showModal: true })}>
+        <button className='btn btn-dark' onClick={() => this.setState({ showModal: true })}>
           Добавить пользователя
         </button>
         <Table
